@@ -56,8 +56,7 @@ client.on('guildMemberAdd', async member => {
 
     let inviterMention = 'Unknown';
     if (usedInvite && usedInvite.inviter) {
-        inviterMention = `<@${usedInvite.inviter.id}>`;
-        console.log(`Member joined with invite code ${usedInvite.code}, invited by ${inviterMention}`);
+        inviterMention = `<@${usedInvite.inviter.id}>`
     } else {
         console.log(`Member joined, but no matching invite was found.`);
     }
@@ -67,46 +66,26 @@ client.on('guildMemberAdd', async member => {
 
     const welcomeEmbed = new Discord.MessageEmbed()
         .setColor('#05131f')
-        .setTitle('Welcome to the Server!')
-        .setDescription(`Hello ${member}, welcome to **${member.guild.name}**! enjoy your stay.`)
+        .setTitle('منور السيرفر يا حلو❤️')
+        .setDescription(`مرحبا بك ${member}, في سيرفرنا **${member.guild.name}**! المتواضع❤️.`)
         .addFields(
-            { name: 'Username', value: member.user.tag, inline: true },
-            { name: 'Invited By', value: inviterMention, inline: true },
-            { name: 'Invite Used', value: usedInvite ? `||${usedInvite.code}||` : 'Direct Join', inline: true },
-            { name: 'You\'re Member', value: `${member.guild.memberCount}`, inline: true },
             { name: 'Server Rules', value: '<#1164662648080707604>.', inline: true },
             { name: 'Support Channel', value: '<#1166772582951964702>.', inline: true }
         )
         .setThumbnail(member.user.displayAvatarURL())
-        .setTimestamp();
+        .setTimestamp()
+	.setImage(`https://cdn.discordapp.com/attachments/1113055293069328384/1235264519551451176/image.png?ex=6633bd3b&is=66326bbb&hm=744e2d1de8c54c4f45ba48839b3415914c5a6e1c701d8a9d6bf7c0c82a31e6a5&`)
+	.setTimestamp();
     const bannerUrl = fullUser.bannerURL({ dynamic: true, format: 'png', size: 1024 });
     if (bannerUrl) {
         welcomeEmbed.setImage(bannerUrl);
     }
 
-    // buttons
-    const row = new MessageActionRow()
-        .addComponents(
-            new MessageButton()
-                .setStyle('LINK')
-                .setURL('https://www.youtube.com/@wick_studio')       // link to button 1
-                .setLabel('YouTube')                                 // name of button 1
-                .setEmoji('<:Youtubee:1158819353953828984>'),       // emoji of button 1
-            new MessageButton()
-                .setStyle('LINK')
-                .setURL('https://github.com/wickstudio')           // link to button 2
-                .setLabel('GitHub')                               // name of button 2
-                .setEmoji('<:Github:1132413518348566589>'),      // emoji of button 2
-            new MessageButton()
-                .setStyle('LINK')
-                .setURL('https://wickdev.xyz/')                // link to button 3
-                .setLabel('Website')                          // name of button 3
-                .setEmoji('<:web:1129345172333932595>')      // emoji of button 3
         );
 
-    welcomeChannel.send({ embeds: [welcomeEmbed], components: [row] });
+    welcomeChannel.send({ embeds: [welcomeEmbed] });
 
     invites[member.guild.id] = new Map(newInvites.map(invite => [invite.code, invite.uses]));
 });
 
-client.login(config.botToken);
+client.login("توكن بوتك");
